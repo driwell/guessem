@@ -31,7 +31,7 @@ pub fn setup(mut commands: Commands) {
         Prompt,
         Text2d::new(""),
         TextFont {
-            font_size: 50.0,
+            font_size: 256.0,
             ..default()
         },
     ));
@@ -40,7 +40,7 @@ pub fn setup(mut commands: Commands) {
         Message,
         Text2d::new(""),
         TextFont {
-            font_size: 50.0,
+            font_size: 128.0,
             ..default()
         },
         Transform::from_xyz(0 as f32 * 0.0, -300.0, 0.0),
