@@ -27,7 +27,9 @@ pub fn keyboard_input_system(mut events: EventReader<KeyboardInput>) {
 
         match &event.logical_key {
             Key::Character(character) => {
-                println!("pressed {character}");
+                if character.parse::<i32>().is_ok() {
+                    println!("pressed {character}");
+                }
             }
             _ => continue,
         }
