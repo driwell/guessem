@@ -8,9 +8,6 @@ use bevy::{
 use rand::Rng;
 
 #[derive(Component)]
-pub struct Text(String);
-
-#[derive(Component)]
 pub struct Number(i32);
 
 #[derive(Component)]
@@ -20,6 +17,7 @@ pub struct Player;
 pub struct Computer;
 
 pub fn setup(mut commands: Commands) {
+    commands.spawn(Camera2d);
     let random_number = rand::thread_rng().gen_range(1..=100);
     commands.spawn((Computer, Number(random_number)));
     commands.spawn((Player, Text("".to_string())));
