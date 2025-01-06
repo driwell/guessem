@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use guessem::{generate_number, keyboard_input_system};
+use guessem::{generate_number, keyboard_input_system, Text};
 
 fn main() {
     App::new()

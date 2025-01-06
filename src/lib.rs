@@ -12,7 +12,7 @@ pub struct Text(String);
 struct Number(i32);
 
 #[derive(Component)]
-struct Player;
+pub struct Player;
 
 #[derive(Component)]
 pub struct Computer;
@@ -20,12 +20,12 @@ pub struct Computer;
 pub fn generate_number(mut commands: Commands) {
     let random_number = rand::thread_rng().gen_range(1..=100);
     commands.spawn((Computer, Number(random_number)));
-    commands.spawn((Computer, Text("".to_string())));
+    commands.spawn((Player, Text("".to_string())));
 }
 
 pub fn keyboard_input_system(
     mut events: EventReader<KeyboardInput>,
-    mut query: Query<&mut Text, With<Computer>>,
+    mut query: Query<&mut Text, With<Player>>,
 ) {
     for event in events.read() {
         if !event.state.is_pressed() {
