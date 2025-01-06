@@ -19,13 +19,14 @@ pub struct Player;
 #[derive(Component)]
 pub struct Computer;
 
-pub fn generate_number(mut commands: Commands) {
+pub fn setup(mut commands: Commands) {
     let random_number = rand::thread_rng().gen_range(1..=100);
     commands.spawn((Computer, Number(random_number)));
     commands.spawn((Player, Text("".to_string())));
     commands.spawn((Player, Number(0)));
 }
 
+// TODO: Separate this into multiple stuff
 pub fn keyboard_input_system(
     mut events: EventReader<KeyboardInput>,
     mut text: Query<&mut Text, With<Player>>,
