@@ -54,6 +54,8 @@ pub fn keyboard_input_system(
                     Ordering::Greater => println!("Lower"),
                     Ordering::Equal => println!("Correct"),
                 }
+
+                text.0.clear();
             }
             Key::Backspace => {
                 text.0.pop();
