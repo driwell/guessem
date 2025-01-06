@@ -20,14 +20,22 @@ pub fn setup(mut commands: Commands) {
     commands.spawn(Camera2d);
     let random_number = rand::thread_rng().gen_range(1..=100);
     commands.spawn((Computer, Number(random_number)));
-    commands.spawn((Player, Text("".to_string())));
+
+    commands.spawn((
+        Text2d::new(""),
+        TextFont {
+            font_size: 50.0,
+            ..default()
+        },
+    ));
+
     commands.spawn((Player, Number(0)));
 }
 
 // TODO: Separate this into multiple stuff
 pub fn keyboard_input_system(
     mut events: EventReader<KeyboardInput>,
-    mut text: Query<&mut Text, With<Player>>,
+    mut text: Query<&mut Text2d>,
     mut guess: Query<&mut Number, With<Player>>,
     mut number: Query<&mut Number, (With<Computer>, Without<Player>)>,
 ) {
