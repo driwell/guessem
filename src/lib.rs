@@ -1,22 +1,35 @@
-use std::cmp::Ordering;
+use bevy::{
+    input::keyboard::{Key, KeyboardInput},
+    prelude::*,
+};
 
 use rand::Rng;
 
-pub fn play() {
-    let number = generate_number(1, 100);
-    let guess = 42;
-    println!("number: {number}, guess: {guess}");
-    println!("{}", get_result(&guess, &number));
+#[derive(Component)]
+struct Number(i32);
+
+#[derive(Component)]
+struct Player;
+
+#[derive(Component)]
+struct Computer;
+
+pub fn generate_number(mut commands: Commands) {
+    let random_number = rand::thread_rng().gen_range(1..=100);
+    commands.spawn((Computer, Number(random_number)));
 }
 
-fn generate_number(min: i32, max: i32) -> i32 {
-    rand::thread_rng().gen_range(min..=max)
-}
+pub fn keyboard_input_system(mut events: EventReader<KeyboardInput>) {
+    for event in events.read() {
+        if !event.state.is_pressed() {
+            continue;
+        }
 
-fn get_result(guess: &i32, number: &i32) -> String {
-    match guess.cmp(number) {
-        Ordering::Greater => "Higher".to_string(),
-        Ordering::Less => "Lower".to_string(),
-        Ordering::Equal => "Correct".to_string(),
+        match &event.logical_key {
+            Key::Character(character) => {
+                println!("pressed {character}");
+            }
+            _ => continue,
+        }
     }
 }
