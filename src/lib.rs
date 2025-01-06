@@ -16,12 +16,16 @@ pub struct Player;
 #[derive(Component)]
 pub struct Computer;
 
+#[derive(Component)]
+pub struct Prompt;
+
 pub fn setup(mut commands: Commands) {
     commands.spawn(Camera2d);
     let random_number = rand::thread_rng().gen_range(1..=100);
     commands.spawn((Computer, Number(random_number)));
 
     commands.spawn((
+        Prompt,
         Text2d::new(""),
         TextFont {
             font_size: 50.0,
@@ -35,7 +39,7 @@ pub fn setup(mut commands: Commands) {
 // TODO: Separate this into multiple stuff
 pub fn keyboard_input_system(
     mut events: EventReader<KeyboardInput>,
-    mut text: Query<&mut Text2d>,
+    mut text: Query<&mut Text2d, With<Prompt>>,
     mut guess: Query<&mut Number, With<Player>>,
     mut number: Query<&mut Number, (With<Computer>, Without<Player>)>,
 ) {
