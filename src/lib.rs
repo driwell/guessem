@@ -24,7 +24,7 @@ pub struct Message;
 
 pub fn setup(mut commands: Commands) {
     commands.spawn(Camera2d);
-    let random_number = rand::thread_rng().gen_range(1..=100);
+    let random_number = rand::thread_rng().gen_range(0..=99);
     commands.spawn((Computer, Number(random_number)));
 
     commands.spawn((
@@ -89,7 +89,7 @@ pub fn keyboard_input_system(
                     Ordering::Equal => {
                         message_color.0 = Color::srgb_u8(0, 255, 0);
                         message.0 = "Correct".to_string();
-                        number.0 = rand::thread_rng().gen_range(1..=100);
+                        number.0 = rand::thread_rng().gen_range(0..=99);
                     }
                 }
 
@@ -100,7 +100,7 @@ pub fn keyboard_input_system(
                 println!("{}", text.0);
             }
             Key::Character(character) => {
-                if character.parse::<i32>().is_ok() {
+                if character.parse::<i32>().is_ok() && text.0.len() < 2 {
                     text.0.push_str(character);
                     println!("{}", text.0);
                 }
