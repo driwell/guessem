@@ -62,7 +62,7 @@ pub fn keyboard_input_system(
     let mut text = text.single_mut();
     let mut message = message.single_mut();
     let mut guess = guess.single_mut();
-    let number = number.single_mut();
+    let mut number = number.single_mut();
 
     for event in events.read() {
         if !event.state.is_pressed() {
@@ -80,7 +80,10 @@ pub fn keyboard_input_system(
                 match guess.0.cmp(&number.0) {
                     Ordering::Less => message.0 = "Higher".to_string(),
                     Ordering::Greater => message.0 = "Lower".to_string(),
-                    Ordering::Equal => message.0 = "Correct".to_string(),
+                    Ordering::Equal => {
+                        message.0 = "Correct".to_string();
+                        number.0 = rand::thread_rng().gen_range(1..=100);
+                    }
                 }
 
                 text.0.clear();
