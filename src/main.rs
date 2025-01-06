@@ -1,6 +1,6 @@
 use bevy::prelude::*;
-use guessem::hello;
+use guessem::play;
 
 fn main() {
-    App::new().add_systems(Update, hello).run();
+    App::new().add_systems(Update, play).run();
 }
