@@ -4,8 +4,8 @@ use rand::Rng;
 
 pub fn play() {
     let number = generate_number(1, 100);
-    println!("generated number: {number}");
     let guess = 42;
+    println!("number: {number}, guess: {guess}");
     println!("{}", get_result(&guess, &number));
 }
 
