@@ -52,18 +52,12 @@ pub fn setup(mut commands: Commands) {
 // TODO: Separate this into multiple stuff
 pub fn keyboard_input_system(
     mut events: EventReader<KeyboardInput>,
-    mut text: Query<&mut Text2d, With<Prompt>>,
-    mut message: Query<&mut Text2d, (With<Message>, Without<Prompt>)>,
-    mut message_color: Query<&mut TextColor, (With<Message>, Without<Prompt>)>,
-    mut guess: Query<&mut Number, With<Player>>,
-    mut number: Query<&mut Number, (With<Computer>, Without<Player>)>,
+    mut text: Single<&mut Text2d, With<Prompt>>,
+    mut message: Single<&mut Text2d, (With<Message>, Without<Prompt>)>,
+    mut message_color: Single<&mut TextColor, (With<Message>, Without<Prompt>)>,
+    mut guess: Single<&mut Number, With<Player>>,
+    mut number: Single<&mut Number, (With<Computer>, Without<Player>)>,
 ) {
-    let mut text = text.single_mut();
-    let mut message = message.single_mut();
-    let mut message_color = message_color.single_mut();
-    let mut guess = guess.single_mut();
-    let mut number = number.single_mut();
-
     for event in events.read() {
         if !event.state.is_pressed() {
             continue;
